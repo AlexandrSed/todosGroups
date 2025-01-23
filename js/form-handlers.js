@@ -3,7 +3,7 @@
 
 import { getTodoGroups, saveTodos } from './data.js';
 import { goToGroupList } from './event.js';
-import { getTodoGroupsTemplate } from './render.js';
+import { getTodoGroupsTemplate, getTodosTemplate } from './render.js';
 
 export function handleAddTodoGroup(event) {
   event.preventDefault();
@@ -35,6 +35,7 @@ export function handleAddTodoGroup(event) {
 }
 
 export function handleEditTodoGroup(event) {
+  event.preventDefault();
   const data = serializeForm(event.target);
   const todos = getTodoGroups();
   const id = data.get("id");
@@ -51,6 +52,36 @@ export function handleEditTodoGroup(event) {
   saveTodos(todos);
 
   goToGroupList();
+}
+
+export function handleAddTodo(event) {
+  event.preventDefault();
+
+  const data = serializeForm(event.target);
+  const todos = getTodoGroups();
+  const title = data.get("title");
+  const id = Number(data.get("groupID"));
+  const i = todos.findIndex( object=> object.id === Number(id));
+  const group = todos[i];
+    const newTodo = {
+      id: group.todos.length + 1,
+      title,
+      status: "in progress",
+    };
+    group.todos.push(newTodo);
+  saveTodos(todos);
+
+  const noGroups = document.getElementById("noGroups");
+  const todosList = document.querySelector(".todos__list");
+  if (!todosList) return;
+  if(noGroups) { 
+    todosList.removeChild(noGroups);
+  }
+
+  const newTodoList = getTodosTemplate([newTodo]);
+  todosList.insertAdjacentHTML("beforeend", newTodoList);
+
+  document.forms[0]?.reset();
 }
 
 function serializeForm(formNode) {

@@ -1,7 +1,7 @@
 import { addIcon, backIcon, doneIcon, downloadIcon, editIcon, showIcon, progressIcon, removeIcon, hideIcon, homeIcon } from "./icons.js";
 import { getTodoGroups } from './data.js';
 import { fragment } from "./helpers.js";
-import { handleAddTodoGroup, handleEditTodoGroup } from './form-handlers.js';
+import { handleAddTodo, handleAddTodoGroup, handleEditTodoGroup } from './form-handlers.js';
 import { removeAllGroups, actionWithGroup, goToGroupList } from "./event.js";
 
 export function renderNotFound() {
@@ -57,12 +57,12 @@ export function getTodoGroupsTemplate(groups) {
     return /*html*/`
       <div id=${group.id} class="listItem" data-id="">
         <div class="">
-          <a class="itemLink" href="">
+          <div class="itemLink">
             <h3 class="itemTitle">
               ${group.title}
             </h3>
             <div class="itemDescription">${group.description}</div>
-          </a>
+          </div>
         </div>
         <div class="itemButtons">
           <button id=${'editBtn' + group.id} class="button buttonPrimary" onclick="">
@@ -110,6 +110,59 @@ export function renderEditTodoGroup(group) {
   backBtn.addEventListener("click", goToGroupList);
 
   return page;
+}
+
+export function renderTodos(group) {
+  const page = fragment/*html*/`
+    <div class="TodoList">
+      <div class="header">
+        <h1 class="title">Todos group ${group.title}</h1>
+        <h2 class="description">${group.description}</h2>
+        <form id="addTodoForm">
+          <input type="hidden" name="groupID" value=${group.id}>
+          <label>Add new Todo</label>
+          <input class="input" type="text" placeholder="Add todo" name="title" ${validation('title')}>
+          <button class="button buttonPrimary create-form_add-button" type="submit">
+            ${addIcon()}
+            Add
+          </button>
+        </form>
+      </div>
+      <div class="todos__list list">
+        ${
+          group.todos.length === 0
+          ? /*html*/`<h5 id="noTodos" class="no-entries">No entries yet. Add new one using the form above.</h5>`
+          : getTodosTemplate(group.todos)}
+      </div>
+    </div>
+  `;
+  const applicantForm = page.getElementById('addTodoForm');
+  applicantForm.addEventListener('submit', handleAddTodo);
+
+  // const todosList = page.querySelector(".todos__list");
+  // todosList.addEventListener("click", actionWithTodo);
+  return page;
+}
+
+export function getTodosTemplate(todos) {
+  return todos.map(todo => {
+    return /*html*/`
+      <div id=${todo.id} class="listItem" data-id="">
+        <div class="">
+            <h3 class="itemTitle">
+              ${todo.title}
+            </h3>
+            <div class="itemDescription">${todo.status}</div>
+        </div>
+        <div class="itemButtons">
+          <button id=${'removeBtn' + todo.id} class="removeGroup button buttonDanger" onclick="">
+            ${removeIcon()}
+            Remove
+          </button>
+        </div>
+    </div>
+    `;
+  }).join("");
 }
 
 function validation(name) {

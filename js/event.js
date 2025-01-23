@@ -1,15 +1,31 @@
 import { getTodoGroups, saveTodos } from './data.js';
-import { renderEditTodoGroup, renderTodoGroups } from './render.js';
+import { renderEditTodoGroup, renderTodoGroups, renderTodos } from './render.js';
 
 export function actionWithGroup(event) {
     const buttonID = event.target.id;
-    if(buttonID.includes("removeBtn")) {
-        removeGroup(Number(buttonID.slice(9)));
-    }
-    else if (buttonID.includes("editBtn")) {
 
+    if(buttonID.includes("removeBtn")) 
+        removeGroup(Number(buttonID.slice(9)));
+    
+    else if (buttonID.includes("editBtn")) 
         goToEditingGroup(Number(buttonID.slice(7)));
-    }
+    
+    else if (Number(buttonID) !== NaN)
+        goToTodoList(Number(buttonID));
+}
+
+function goToTodoList(groupID) {
+    const todos = getTodoGroups();
+
+    const group = todos.findIndex(object=> object.id === groupID);
+
+    const container = document.querySelector(".content");
+      if (!container) return;
+
+      container.replaceChildren(
+
+        renderTodos(todos[group])
+    );
 }
 
 export function goToGroupList() {
@@ -21,7 +37,7 @@ export function goToGroupList() {
 function goToEditingGroup(groupID) {
     const todos = getTodoGroups();
 
-    const group = todos.findIndex((object)=> {return object.id === groupID});
+    const group = todos.findIndex(object=> object.id === groupID);
 
     const container = document.querySelector(".content");
       if (!container) return;
