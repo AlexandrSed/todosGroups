@@ -1,5 +1,5 @@
 import { getTodoGroups, saveTodos } from './data.js';
-import { renderEditTodoGroup, renderTodoList } from './render.js';
+import { renderEditTodoGroup, renderTodoGroups } from './render.js';
 
 export function actionWithGroup(event) {
     const buttonID = event.target.id;
@@ -15,7 +15,7 @@ export function actionWithGroup(event) {
 export function goToGroupList() {
     const container = document.querySelector(".content");
       if (!container) return;
-      container.replaceChildren(renderTodoList());
+      container.replaceChildren(renderTodoGroups());
 }
 
 function goToEditingGroup(groupID) {

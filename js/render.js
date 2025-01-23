@@ -10,12 +10,12 @@ export function renderNotFound() {
   `;
 }
 
-export function renderTodoList() {
+export function renderTodoGroups() {
   const groups = getTodoGroups();
   const page = fragment/*html*/`
     <div class="TodoList">
       <div class="header">
-        <h1 class="title">Todo list</h1>
+        <h1 class="title">Todos group list</h1>
         <form id="addGroupForm">
           <label>Add new group</label>
           <input class="input" type="text" placeholder="Add group title" name="title" ${validation('title')}>

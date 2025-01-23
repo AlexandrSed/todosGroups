@@ -1,4 +1,4 @@
-import {renderTodoList} from './render.js';
+import {renderTodoGroups} from './render.js';
 import {initTheme} from "./theme.js";
 
 document.addEventListener("DOMContentLoaded", start);
@@ -13,7 +13,7 @@ function start() {
     </div>` 
   const container = document.querySelector(".content");
   if (!container) return;
-  container.replaceChildren(renderTodoList());
+  container.replaceChildren(renderTodoGroups());
 //   root.addEventListener("click", handleClick);
   initTheme()
 //   initCustomEvents()
