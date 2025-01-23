@@ -83,11 +83,11 @@ export function renderEditTodoGroup(group) {
     <div class="header">
       <h1 class="title">Edit group #${group.id}</h1>
       <form id="editGroupForm">
-        <input class="input" type="hidden" value=${group.id} name="id">
+        <input class="input" type="hidden" value="${group.id}" name="id">
         <label>Input new title</label>
-        <input class="input" type="text" value=${group.title} placeholder="group title" name="title" ${validation('title')}>
+        <input class="input" type="text" value="${group.title}" placeholder="group title" name="title" ${validation('title')}>
         <label>Input new description</label>
-        <input class="input" type="text" value=${group.description} placeholder="description" name="description" ${validation('description')}>
+        <input class="input" type="text" value="${group.description}" placeholder="description" name="description" ${validation('description')}>
         <button class="button buttonPrimary" type="submit">
           ${editIcon()}
           Edit
