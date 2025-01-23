@@ -30,6 +30,8 @@ export function handleAddTodoGroup(event) {
 
   const newGroupList = getTodoGroupsTemplate([newGroup]);
   groupsList.insertAdjacentHTML("beforeend", newGroupList);
+
+  document.forms[0]?.reset();
 }
 
 function serializeForm(formNode) {
