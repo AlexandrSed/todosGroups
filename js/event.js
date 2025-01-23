@@ -2,9 +2,14 @@ import { getTodoGroups, saveTodos } from './data.js';
 import { renderEditTodoGroup, renderTodoGroups, renderTodos } from './render.js';
 
 export function actionWithGroup(event) {
-    const buttonID = event.target.id;
+    let elem = event.target;
+    while (!elem.id) {
+        elem = elem.parentElement;
+    }
 
-    if(buttonID.includes("removeBtn")) 
+    const buttonID = elem.id;
+
+    if (buttonID.includes("removeBtn")) 
         removeGroup(Number(buttonID.slice(9)));
     
     else if (buttonID.includes("editBtn")) 

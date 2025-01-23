@@ -56,13 +56,11 @@ export function getTodoGroupsTemplate(groups) {
   return groups.map(group => {
     return /*html*/`
       <div id=${group.id} class="listItem" data-id="">
-        <div class="">
-          <div class="itemLink">
-            <h3 class="itemTitle">
-              ${group.title}
-            </h3>
-            <div class="itemDescription">${group.description}</div>
-          </div>
+        <div class="itemLink">
+          <h3 class="itemTitle">
+            ${group.title}
+          </h3>
+          <div class="itemDescription">${group.description}</div>
         </div>
         <div class="itemButtons">
           <button id=${'editBtn' + group.id} class="button buttonPrimary" onclick="">
