@@ -1,0 +1,202 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+
+.light {
+  --bg-color: #fff;
+  --container-bg-color: #fff;
+  --text-color: #333;
+  --border-color: #333;
+  --primary-color: #007bff;
+  --primary-hover-bg-color: #0069d9;
+  --secondary-hover-color: #c0bfbf;
+  --secondary-color: #333;
+  --danger-color: #dc3545;
+  --danger-hover-bg-color: #c82333;
+  --done-color: #029121;
+  --progress-color: #b08300;
+  --card-bg-color: #dfe7ee;
+}
+
+.dark {
+  --bg-color: #333;
+  --container-bg-color: #4a4a4a;
+  --text-color: #fff;
+  --border-color: #4a4a4a;
+  --primary-color: #007bff;
+  --primary-hover-bg-color: #0069d9;
+  --secondary-hover-color: #666;
+  --secondary-color: #fff;
+  --danger-color: #dc3545;
+  --danger-hover-bg-color: #c82333;
+  --done-color: #20fa4c;
+  --progress-color: #ffc62a;
+  --card-bg-color: #4a4a4a;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }
+  
+  .container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1rem;
+    position: relative;
+    border: 1px solid var(--border-color);
+    border-radius: 0.3rem;
+    background-color: var(--container-bg-color);
+  }
+
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.header form {
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    outline: none;
+    margin-bottom: 1.2rem;
+    padding: 0.5rem;
+    border: 1px solid #333;
+    border-radius: 0.3rem;
+    font-size: 1rem;
+}
+
+.button {
+    height: 2.5rem;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 0.25rem;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem 1rem;
+    transition: background-color 0.3s ease 0s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+}
+
+.buttonPrimary {
+    background-color: var(--container-bg-color);
+    border: 3px solid var(--primary-color);
+    color: var(--primary-color);
+}
+  
+.buttonPrimary:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+  
+.buttonDanger {
+    background-color: var(--container-bg-color);
+    border: 3px solid var(--danger-color);
+    color: var(--danger-color);
+}
+  
+.buttonDanger:hover {
+    background-color: var(--danger-hover-bg-color);
+    color: #fff;
+}
+
+.removeAll {
+    text-align: end;
+}
+
+.title {
+    font-weight: 400;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.no-entries {
+    font-size: 1rem;
+}
+
+.list {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.theme-toggleButton {
+    width: 2rem;
+    height: 2rem;
+    background-color: transparent;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    position: relative;
+}
+
+.theme-toggleButton svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease 0s;
+}
+
+.lucide {
+    width: 1rem;
+    height: 1rem;
+    color: inherit;
+}
+
+.lucide-sun,
+.lucide-moon {
+    opacity: 1;
+    transition: opacity 0.3s ease 0s;
+    width: 2rem;
+    height: 2rem;
+}
+
+.light .lucide-sun {
+    opacity: 0;
+}
+
+.dark .lucide-moon {
+    opacity: 0;
+}
+
+.listItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 3px solid #ccc;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.itemLink {
+    text-align: start;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.listItem:hover {
+    cursor: pointer;
+    box-shadow: 0 0 5px 0 var(--secondary-hover-color);
+}
