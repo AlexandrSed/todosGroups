@@ -2,7 +2,7 @@
 /// <reference path="./types.d.ts" />
 
 import { getTodoGroups, saveTodos } from './data.js';
-import { removeGroup } from './event.js';
+import { goToGroupList } from './event.js';
 import { getTodoGroupsTemplate } from './render.js';
 
 export function handleAddTodoGroup(event) {
@@ -32,6 +32,25 @@ export function handleAddTodoGroup(event) {
   groupsList.insertAdjacentHTML("beforeend", newGroupList);
 
   document.forms[0]?.reset();
+}
+
+export function handleEditTodoGroup(event) {
+  const data = serializeForm(event.target);
+  const todos = getTodoGroups();
+  const id = data.get("id");
+  const title = data.get("title");
+  const description = data.get("description");
+
+  const i = todos.findIndex( object=> object.id === Number(id));
+  todos[i] = {
+    ...todos[i],
+    title: title,
+    description: description
+  }
+
+  saveTodos(todos);
+
+  goToGroupList();
 }
 
 function serializeForm(formNode) {

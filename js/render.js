@@ -1,8 +1,8 @@
 import { addIcon, backIcon, doneIcon, downloadIcon, editIcon, showIcon, progressIcon, removeIcon, hideIcon, homeIcon } from "./icons.js";
 import { getTodoGroups } from './data.js';
 import { fragment } from "./helpers.js";
-import { handleAddTodoGroup } from './form-handlers.js';
-import { removeAllGroups, actionWithGroup } from "./event.js";
+import { handleAddTodoGroup, handleEditTodoGroup } from './form-handlers.js';
+import { removeAllGroups, actionWithGroup, goToGroupList } from "./event.js";
 
 export function renderNotFound() {
   return fragment/*html*/`
@@ -65,7 +65,7 @@ export function getTodoGroupsTemplate(groups) {
           </a>
         </div>
         <div class="itemButtons">
-          <button class="button buttonPrimary" onclick="">
+          <button id=${'editBtn' + group.id} class="button buttonPrimary" onclick="">
             ${editIcon()}
             Edit
           </button>
@@ -77,6 +77,39 @@ export function getTodoGroupsTemplate(groups) {
     </div>
     `;
   }).join("");
+}
+
+export function renderEditTodoGroup(group) {
+  const page = fragment/*html*/`
+  <div class="TodoList">
+    <div class="header">
+      <h1 class="title">Edit group #${group.id}</h1>
+      <form id="editGroupForm">
+        <input class="input" type="hidden" value=${group.id} name="id">
+        <label>Input new title</label>
+        <input class="input" type="text" value=${group.title} placeholder="group title" name="title" ${validation('title')}>
+        <label>Input new description</label>
+        <input class="input" type="text" value=${group.description} placeholder="description" name="description" ${validation('description')}>
+        <button class="button buttonPrimary" type="submit">
+          ${editIcon()}
+          Edit
+        </button>
+      </form>
+      <button id="backBtn" class="button buttonPrimary">
+          ${backIcon()}
+          Back
+        </button>
+    </div>
+  </div>
+  `;
+
+  const applicantForm = page.getElementById('editGroupForm');
+  applicantForm.addEventListener('submit', handleEditTodoGroup);
+
+  const backBtn = page.getElementById('backBtn');
+  backBtn.addEventListener("click", goToGroupList);
+
+  return page;
 }
 
 function validation(name) {
