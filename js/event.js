@@ -3,7 +3,7 @@ import { getTodoGroups, saveTodos } from './data.js';
 export function actionWithGroup(event) {
     const buttonID = event.target.id;
     if(buttonID.includes("removeBtn")) {
-        removeGroup(Number(buttonID.slice(8)));
+        removeGroup(Number(buttonID.slice(9)));
     }
 }
 
@@ -14,10 +14,10 @@ export function removeGroup(groupID) {
 
     saveTodos(todos);
 
-    const group = document.getElementById(groupID);
-    if (!group) return;
+    document.getElementById(groupID).remove();
 
-    group.innerHTML = "";
+    if (todos.length === 0)
+        removeAllGroups();
 }
 
 export function removeAllGroups() {
