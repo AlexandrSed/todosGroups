@@ -71,7 +71,7 @@ export function handleAddTodo(event) {
     group.todos.push(newTodo);
   saveTodos(todos);
 
-  const noGroups = document.getElementById("noGroups");
+  const noGroups = document.querySelector(".no-entries");
   const todosList = document.querySelector(".todos__list");
   if (!todosList) return;
   if(noGroups) { 
