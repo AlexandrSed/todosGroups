@@ -30,8 +30,25 @@ export function actionWithTodo(event) {
     if (buttonID.includes("removeBtn")) 
         removeTodo(Number(buttonID.slice(9)));
     
-    // else if (Number(buttonID) !== NaN)
-    //     changeStatus(Number(buttonID));
+    else if (Number(buttonID) !== NaN)
+        changeStatus(Number(buttonID));
+}
+
+function changeStatus(todoID) {
+    const todoGroups = getTodoGroups();
+    const groupID = document.getElementsByName("groupID")[0]?.value;
+    const todos = todoGroups.filter(obj => obj.id === Number(groupID))[0]?.todos;
+    const statusElem = document.getElementById("status" + todoID);
+
+    const currentTodo = todos.filter( obj => obj.id === todoID)[0];
+
+    currentTodo.status = (currentTodo.status === "in progress") ? "done" : "in progress";
+
+    saveTodos(todoGroups);
+
+    statusElem.innerHTML = currentTodo.status;
+    statusElem.classList.remove(currentTodo.status === "in progress" ? "done" : "progress");
+    statusElem.classList.add(currentTodo.status === "in progress" ? "progress" : "done");
 }
 
 function removeTodo(todoID) {

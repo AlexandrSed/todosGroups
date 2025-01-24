@@ -129,6 +129,10 @@
     margin: 0;
 }
 
+.done { color: var(--done-color); }
+
+.progress { color: var(--progress-color); }
+
 .no-entries {
     font-size: 1rem;
 }

@@ -157,7 +157,7 @@ export function getTodosTemplate(todos) {
             <h3 class="itemTitle">
               ${todo.title}
             </h3>
-            <div class="itemDescription">${todo.status}</div>
+            <div id=${'status' + todo.id} class="progress">${todo.status}</div>
         </div>
         <div class="itemButtons">
           <button hidden id=${'removeBtn' + todo.id} class="removeGroup button buttonDanger" onclick="">
