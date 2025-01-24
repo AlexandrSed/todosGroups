@@ -2,7 +2,7 @@ import { addIcon, backIcon, doneIcon, downloadIcon, editIcon, showIcon, progress
 import { getTodoGroups } from './data.js';
 import { fragment } from "./helpers.js";
 import { handleAddTodo, handleAddTodoGroup, handleEditTodoGroup } from './form-handlers.js';
-import { removeAllGroups, actionWithGroup, goToGroupList } from "./event.js";
+import { removeAllGroups, actionWithGroup, goToGroupList, actionWithTodo } from "./event.js";
 
 export function renderNotFound() {
   return fragment/*html*/`
@@ -137,8 +137,8 @@ export function renderTodos(group) {
   const applicantForm = page.getElementById('addTodoForm');
   applicantForm.addEventListener('submit', handleAddTodo);
 
-  // const todosList = page.querySelector(".todos__list");
-  // todosList.addEventListener("click", actionWithTodo);
+  const todosList = page.querySelector(".todos__list");
+  todosList.addEventListener("click", actionWithTodo);
   return page;
 }
 
@@ -153,7 +153,7 @@ export function getTodosTemplate(todos) {
             <div class="itemDescription">${todo.status}</div>
         </div>
         <div class="itemButtons">
-          <button id=${'removeBtn' + todo.id} class="removeGroup button buttonDanger" onclick="">
+          <button hidden id=${'removeBtn' + todo.id} class="removeGroup button buttonDanger" onclick="">
             ${removeIcon()}
             Remove
           </button>
