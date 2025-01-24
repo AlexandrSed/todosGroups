@@ -125,6 +125,10 @@ export function renderTodos(group) {
             Add
           </button>
         </form>
+        <button id="backBtn" class="button buttonPrimary">
+          ${backIcon()}
+          Back
+        </button>
       </div>
       <div class="todos__list list">
         ${
@@ -139,6 +143,9 @@ export function renderTodos(group) {
 
   const todosList = page.querySelector(".todos__list");
   todosList.addEventListener("click", actionWithTodo);
+
+  const backBtn = page.getElementById('backBtn');
+  backBtn.addEventListener("click", goToGroupList);
   return page;
 }
 
